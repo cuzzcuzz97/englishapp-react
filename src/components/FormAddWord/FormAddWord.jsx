@@ -24,13 +24,13 @@ const FormAddWord = ({words,list_id,setWords,vocabulary,getVocab,getListVocab}) 
     //     };
     //   }
 
-    useEffect(() => {
-      const loadInput = async() => {
-        const response = await axios.get('http://localhost:5000/words')
-        setRecommendInput(response.data)
-      }
-      loadInput();
-    },[])
+    // useEffect(() => {
+    //   const loadInput = async() => {
+    //     const response = await axios.get('https://api-englishapp-production.up.railway.app/words')
+    //     setRecommendInput(response.data)
+    //   }
+    //   loadInput();
+    // },[])
 
     // const debouncedSearch = debounce((text) => {
     //     let matches = [];

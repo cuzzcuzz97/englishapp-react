@@ -2,7 +2,7 @@ import { React, useState , useEffect } from 'react';
 import './main.css';
 import { AddList, VocabList } from '../../components';
 import { useDispatch } from 'react-redux'
-import { fetchProtectedInfo, fetchUserInfo, onLogout } from '../../api/auth'
+import { fetchProtectedInfo, fetchUserInfo, onLogout, fetchLists } from '../../api/auth'
 import {unauthenticateUser } from '../../redux/slices/authSlice'
 import Layout from '../../components/Layout/Layout';
 
@@ -40,8 +40,8 @@ const Main = () => {
       try {
         const data = await fetchUserInfo()
         const user_id = data.data.user.user_id
-        const response = await fetch(`http://localhost:5000/app/${user_id}`);
-        const jsonData = await response.json();
+        const response = await fetchLists(user_id);
+        const jsonData = await response.data;
         setLists(jsonData)
       } catch (err) {
         console.log(err)

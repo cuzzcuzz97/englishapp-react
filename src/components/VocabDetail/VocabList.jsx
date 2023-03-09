@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Vocab } from '../../particles';
 import './vocablist.css';
-import { deleteListVocab } from '../../api/auth'
+import { deleteListVocab,fetchVocabs } from '../../api/auth'
 import FormAddWord from '../FormAddWord/FormAddWord';
+
 
 const VocabList = ({lists, getListVocab}) => {
   const [selectedList, setSelectedList] = useState("");
@@ -16,13 +17,13 @@ const VocabList = ({lists, getListVocab}) => {
 
   const getVocab = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/app/vocab/${id}`,
-      {
-        method: 'GET',
-        credentials: 'include' // include cookies in the request
-      }
-      );
-      const jsonData = await response.json();
+      const response = await fetchVocabs(id,
+        {
+          method: 'GET',
+          credentials: 'include' // include cookies in the request
+        }
+        );
+      const jsonData = await response.data;
       setVocab(jsonData);
     } catch (err) {
       console.log(err)

@@ -1,41 +1,50 @@
 import axios from 'axios'
 axios.defaults.withCredentials = true
-
+const url = 'https://api-englishapp-production.up.railway.app/'
+// const url = 'http://localhost:5000/'
 
 
 export async function onRegistration(registrationData) {
-    return await axios.post('http://localhost:5000/register',
+    return await axios.post(`${url}register`,
     registrationData)
 }
 
 export async function onLogin(loginData) {
-    return await axios.post('http://localhost:5000/login', loginData)
+    return await axios.post(`${url}login`, loginData)
 }
 
 export async function onLogout() {
-    return await axios.get('http://localhost:5000/logout')
+    return await axios.get(`${url}logout`)
 }
 
 export async function fetchProtectedInfo() {
-    return await axios.get('http://localhost:5000/protected')
+    return await axios.get(`${url}protected`)
 }
 
 export async function fetchUserInfo() {
-    return await axios.get('http://localhost:5000/get-user')
+    return await axios.get(`${url}get-user`)
+}
+
+export async function fetchLists(user_id) {
+    return await axios.get(`${url}app/${user_id}`)
+}
+
+export async function fetchVocabs(id) {
+    return await axios.get(`${url}app/vocab/${id}`)
 }
 
 export async function addNewListVocab(listData) {
-    return await axios.post('http://localhost:5000/app', listData)
+    return await axios.post(`${url}app`, listData)
 }
 
 export async function addNewVocab(vocabData) {
-    return await axios.post('http://localhost:5000/app/addvocab', vocabData)
+    return await axios.post(`${url}app/addvocab`, vocabData)
 }
 
 export async function deleteListVocab(listId) {
-    return await axios.delete(`http://localhost:5000/app/delete/${listId}`)
+    return await axios.delete(`${url}app/delete/${listId}`)
 }
 
 export async function deleteVocab(vocabId) {
-    return await axios.delete(`http://localhost:5000/app/vocab/delete/${vocabId}`)
+    return await axios.delete(`${url}app/vocab/delete/${vocabId}`)
 }

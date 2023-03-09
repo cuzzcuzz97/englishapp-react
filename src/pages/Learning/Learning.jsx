@@ -4,6 +4,7 @@ import './learning.css';
 import { useParams } from 'react-router-dom';
 import { useSpeechSynthesis } from 'react-speech-kit';
 import { RxSpeakerLoud } from 'react-icons/rx'
+import { fetchVocabs } from '../../api/auth';
 
 const Learning = () => {
     const [scrollLeft, setScrollLeft] = useState(0);
@@ -45,11 +46,12 @@ const Learning = () => {
     useEffect(() => {
         const getVocab = async (id) => {
             try {
-            const response = await fetch(`http://localhost:5000/app/vocab/${id}`,  {
+            const response = await fetchVocabs(id
+            ,  {
                 method: 'GET',
                 credentials: 'include' // include cookies in the request
               });
-              const jsonData = await response.json();
+              const jsonData = await response.data;
               const updatedCards = jsonData.map((card) => {
                 return {
                     ...card,
@@ -104,7 +106,7 @@ const Learning = () => {
                             <div className="flip-card-back d-flex flex-column align-items-center justify-content-center">
                                 <h2 className='no-select'>{card.meaning}</h2>
                                 <p className='no-select'>{card.phonetic}</p>
-                                <p className='no-select'>{card.meanings[0].definitions[0].example || card.meanings[0].definitions[1].example}</p>
+                                {/* <p className='no-select'>{card.meanings[0].definitions[0].example || "" }</p> */}
                             </div>
                         </div>
                     </div>

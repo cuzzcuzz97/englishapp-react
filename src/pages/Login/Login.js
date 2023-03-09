@@ -4,7 +4,6 @@ import './login.css'
 import { useDispatch } from 'react-redux'
 import { authenticateUser } from '../../redux/slices/authSlice'
 import Layout from '../../components/Layout/Layout'
-import Cookies from 'js-cookie'
 
 
 const Login = () => {
@@ -23,10 +22,8 @@ const Login = () => {
     e.preventDefault()
 
     try {
-
       await onLogin(values)
       dispatch(authenticateUser())
-
       localStorage.setItem('isAuth', 'true')
     } catch (error) {
       setError(error.response.data.errors[0].msg)
