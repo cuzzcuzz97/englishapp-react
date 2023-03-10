@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from 'react'
 import Layout from '../../components/Layout/Layout'
 import './learning.css';
 import { useParams } from 'react-router-dom';
-import { useSpeechSynthesis } from 'react-speech-kit';
 import { RxSpeakerLoud } from 'react-icons/rx'
 import { fetchVocabs } from '../../api/auth';
+import speechHandler from '../../particles/speech/speech';
 
 const Learning = () => {
     const [scrollLeft, setScrollLeft] = useState(0);
@@ -12,13 +12,12 @@ const Learning = () => {
     const [cards,setCards] = useState([]);
     const [sufferMessage,setSufferMessage] = useState('');
     const { id } = useParams();
-    const { speak } = useSpeechSynthesis();
     const [vocabCards,setVocabCards] = useState([]);
+    const msg = new SpeechSynthesisUtterance()
 
-
-    const handleOnClickSpeak = (text) => {
-        speak({text:text})
-    }
+    const handleClickSpeak = async (word, msg) => {
+      await speechHandler(word,msg);
+    };
 
     const handleScroll = (scrollOffset) => {
       scrollRef.current.scrollLeft += scrollOffset;
@@ -87,7 +86,11 @@ const Learning = () => {
         <div className='container d-flex flex-column align-items-center justify-content-center'>
             <div className='title m-5'>Learning Here</div>
             <div className='d-flex flex-row align-items-center justify-content-center'
-            style={{width: '100%', border:'5px solid black' }}
+            style={{width: '100%', border:'1px solid #cccccc',
+            borderRadius: '5px',
+            boxShadow: '0 0 5px #a5a5ff',
+            overflow: 'hidden'
+        }}
             >
             <div className=" card-group d-flex flex-row flex-nowrap overflow-scroll"
              
@@ -111,7 +114,7 @@ const Learning = () => {
                         </div>
                     </div>
                     <p style={{marginTop: '20px'}} onClick={() => {
-                    handleOnClickSpeak(card.name)
+                        handleClickSpeak(card.name, msg)
                 }
                     }><RxSpeakerLoud size={40}/></p>
                 </div>

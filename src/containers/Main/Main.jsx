@@ -30,6 +30,9 @@ const Main = () => {
       try {
         const { data } = await fetchProtectedInfo()
         setProtectedData(data.info)
+        if (protectedData) {
+          
+        }
         setLoading(false)
       } catch (error) {
         logout()

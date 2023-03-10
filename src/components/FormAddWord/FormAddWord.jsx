@@ -1,13 +1,12 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useRef} from 'react';
 import { addNewVocab } from '../../api/auth';
-import axios from 'axios';
 
 const FormAddWord = ({words,list_id,setWords,vocabulary,getVocab,getListVocab}) => {
     const inputRef = useRef(null);
     const [newWord, setNewWord] = useState("");
     const [newMeaning, setNewMeaning] = useState("");
     const [recommendedVocab, setRecommendedVocab] = useState("");
-    const [recommendInput, setRecommendInput] = useState([])
+    // const [recommendInput, setRecommendInput] = useState([])
     // const [suggestions, setSuggestions] = useState([])
     // const [vocabs,setVocabs] = useState([])
 

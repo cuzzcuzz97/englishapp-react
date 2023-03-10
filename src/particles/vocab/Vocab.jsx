@@ -1,16 +1,17 @@
 import React from 'react';
 import './vocab.css';
-import { useSpeechSynthesis } from 'react-speech-kit';
 import { deleteVocab } from '../../api/auth';
+import speechHandler from '../speech/speech';
 
 const Vocab = ({words,setWords,getVocab,selectedList}) => {
+  const msg = new SpeechSynthesisUtterance()
 
 
-  const { speak } = useSpeechSynthesis();
+  const handleClickSpeak = async (word, msg) => {
+    await speechHandler(word,msg);
+  };
 
-  const handleOnClickSpeak = (text) => {
-    speak({text:text})
-  }
+
   const handleDeleteVocab = async (word) => {
     try {
       await deleteVocab(word.id);
@@ -30,7 +31,7 @@ const Vocab = ({words,setWords,getVocab,selectedList}) => {
             <div className='listvocab-item__container'>
               <span className='listvocab-item__vocab'
               onClick={() => {
-                handleOnClickSpeak(word.name);
+                handleClickSpeak(word.name, msg)
               }}
               >
                 {index+1}.{word.name}

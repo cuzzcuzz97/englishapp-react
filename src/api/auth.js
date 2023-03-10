@@ -1,7 +1,7 @@
 import axios from 'axios'
 axios.defaults.withCredentials = true
-const url = 'https://api-englishapp-production.up.railway.app/'
-// const url = 'http://localhost:5000/'
+// const url = 'https://api-englishapp-production.up.railway.app/'
+const url = 'http://localhost:5000/'
 
 
 export async function onRegistration(registrationData) {

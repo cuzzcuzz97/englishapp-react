@@ -30,16 +30,17 @@ const AddList = ({lists,setLists, isAddList,setIsAddList,getListVocab}) => {
                 return {
                     name: name,
                     meaning: meaning,
-                    list_id: data.rows[0].id // set the list_id to the id of the new list
+                    list_id: data.rows[0].id 
                 };
                 
             });
             await Promise.all(
                 newVocab.map((vocab) => {
-                    return addNewVocab(vocab); // call the addNewVocab function for each new vocabulary item
+                    return addNewVocab(vocab);
                 })
             );
             setNewListName('');
+            localStorage.setItem('vocabulary', JSON.stringify(0));
             setIsAddList(!isAddList)
             getListVocab()
             // setLists([...lists, newList]);
