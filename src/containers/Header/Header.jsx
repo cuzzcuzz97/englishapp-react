@@ -15,7 +15,7 @@ const Header = () => {
 
   const userData = async () => {
     try {
-      const { data } = await fetchUserInfo()
+      const data = await fetchUserInfo()
       setUserInfo(data.user)
     } catch (error) {
 

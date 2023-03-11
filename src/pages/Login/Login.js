@@ -22,7 +22,9 @@ const Login = () => {
     e.preventDefault()
 
     try {
-      await onLogin(values)
+      await onLogin(values,{
+        credentials: 'include'
+      })
       dispatch(authenticateUser())
       localStorage.setItem('isAuth', 'true')
     } catch (error) {

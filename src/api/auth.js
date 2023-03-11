@@ -1,7 +1,7 @@
 import axios from 'axios'
 axios.defaults.withCredentials = true
-// const url = 'https://api-englishapp-production.up.railway.app/'
-const url = 'http://localhost:5000/'
+const url = 'https://api-englishapp-production.up.railway.app/'
+// const url = 'http://localhost:5000/'
 
 
 export async function onRegistration(registrationData) {
@@ -21,9 +21,26 @@ export async function fetchProtectedInfo() {
     return await axios.get(`${url}protected`)
 }
 
+// export async function fetchUserInfo() {
+//     return await axios.get(`${url}get-user`, {
+//       withCredentials: true,
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//     });
+//   }
 export async function fetchUserInfo() {
-    return await axios.get(`${url}get-user`)
-}
+    try {
+      const response = await axios.get(`${url}get-user`, {
+        withCredentials: true
+      });
+      return response.data;
+    } catch (error) {
+      console.error('fetchUserInfo error', error);
+      throw error;
+    }
+  }
+
 
 export async function fetchLists(user_id) {
     return await axios.get(`${url}app/${user_id}`)

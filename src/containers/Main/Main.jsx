@@ -31,7 +31,6 @@ const Main = () => {
         const { data } = await fetchProtectedInfo()
         setProtectedData(data.info)
         if (protectedData) {
-          
         }
         setLoading(false)
       } catch (error) {
@@ -42,7 +41,7 @@ const Main = () => {
     const getListVocab = async () => {
       try {
         const data = await fetchUserInfo()
-        const user_id = data.data.user.user_id
+        const user_id = data.user.user_id
         const response = await fetchLists(user_id);
         const jsonData = await response.data;
         setLists(jsonData)
@@ -55,9 +54,6 @@ const Main = () => {
       protectedInfo()
     })
     useEffect(() => {
-      // Get the user_id from localStorage
-
-      // Call the getListVocab function
       getListVocab();
     }, []);
 
@@ -90,8 +86,6 @@ const Main = () => {
                           </span>
                   </div>
                   {isAddList ? (<VocabList lists={listVocab} getListVocab={getListVocab} />) : (<AddList lists={listVocab} setLists={setLists} isAddList={isAddList} setIsAddList={setToggled} getListVocab={getListVocab}  />)}
-                  
-                  {/* <VocabDetail/> */}
               </div>
           </div>
       </div>
