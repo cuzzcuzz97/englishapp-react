@@ -1,6 +1,6 @@
 {
   "name": "englishapp",
-  "proxy": "https://api-englishapp-production.up.railway.app/",
+  "proxy": "https://api-englishapp-production.up.railway.app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
