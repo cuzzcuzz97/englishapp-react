@@ -40,7 +40,7 @@
     "webpack-cli": "^4.9.0"
   },
   "scripts": {
-    "start": "npm start",
+    "start": "npm install --production && node app.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
