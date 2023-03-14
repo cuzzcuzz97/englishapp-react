@@ -1,5 +1,6 @@
 const speechHandler = async (word,msg) => {
     msg.text = word;
+    msg.lang = 'en-US';
     await new Promise((resolve) => {
       window.speechSynthesis.speak(msg);
       msg.onend = resolve;
@@ -7,3 +8,4 @@ const speechHandler = async (word,msg) => {
   };
 
   export default speechHandler;
+  

@@ -6,7 +6,6 @@ import speechHandler from '../speech/speech';
 const Vocab = ({words,setWords,getVocab,selectedList}) => {
   const msg = new SpeechSynthesisUtterance()
 
-
   const handleClickSpeak = async (word, msg) => {
     await speechHandler(word,msg);
   };
