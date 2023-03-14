@@ -37,9 +37,9 @@ const VocabList = ({lists, getListVocab}) => {
   const handleDelete = async (id) => {
         const willDelete = window.confirm('Are you sure you want to delete this vocabulary list?');
         if (willDelete) {
-          deleteListVocab(id)
-          setSelectedList(null)
-          getListVocab()
+          await deleteListVocab(id)
+          await setSelectedList(null)
+          await getListVocab()
         } else {
 
         }
@@ -69,14 +69,23 @@ const VocabList = ({lists, getListVocab}) => {
   }
 
   return (
-    <div className={`app__main-container__folder-listvocab `}>
-                    {lists.map((list,index) => (
-                        <div onClick={() => handleListClick(list)} key={index} className='app__main-container__folder-listvocab__item'>
-                            <span>{index+1}.{list.title}</span>
-                        </div>
-                    ))}
-                </div>
+    <div className={`app__main-container__folder-listvocab`}>
+      {lists.length > 0 ? (
+        lists.map((list, index) => (
+          <div
+            onClick={() => handleListClick(list)}
+            key={index}
+            className="app__main-container__folder-listvocab__item"
+          >
+            <span>{index + 1}.{list.title}</span>
+          </div>
+        ))
+      ) : (
+        <div style={{textAlign: "center", fontWeight: 800, fontSize: "25px", color: "cornflowerblue", padding: "20px"}}>There are no lists yet! Add a new one.</div>
+      )}
+    </div>
   );
+  
 };
 
 export default VocabList

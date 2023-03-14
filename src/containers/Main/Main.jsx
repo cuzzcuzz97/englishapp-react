@@ -73,7 +73,7 @@ const Main = () => {
           setToggled(!isAddList);
         }
       } catch (err) {
-        
+        setToggled(!isAddList);
       }
       
     }
