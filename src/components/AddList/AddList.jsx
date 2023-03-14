@@ -13,20 +13,19 @@ const vocabulary = {
 const AddList = ({lists,setLists, isAddList,setIsAddList,getListVocab}) => {
     const [newListName, setNewListName] = useState("");
     const [words,setWords] = useState(vocabulary.words);
-
+    const [success, setSuccess] = useState(false)
 
     const handleAddList = async (event) => {
         event.preventDefault();
         if (newListName.trim() === '' || words.length === 0) {
           return;
         }
+        setSuccess(true)
         try {
             const dataUser = await fetchUserInfo()
-            console.log(dataUser.user)
             const user_id = dataUser.user.user_id
             const listName = {title: newListName, user_id: user_id}
             const { data } = await addNewListVocab(listName)
-    
             const newVocab = words.map(({ name, meaning }) => {
                 return {
                     name: name,
@@ -40,7 +39,7 @@ const AddList = ({lists,setLists, isAddList,setIsAddList,getListVocab}) => {
                     return addNewVocab(vocab);
                 })
             );
-
+            setIsAddList(!isAddList)
             setNewListName('');
             localStorage.setItem('vocabulary', JSON.stringify(0));
             setIsAddList(!isAddList)
@@ -54,7 +53,8 @@ const AddList = ({lists,setLists, isAddList,setIsAddList,getListVocab}) => {
       }
     
   return (
-    <div className='app__main-container__folder-addlist'>
+      <> {!success ? (
+<div className='app__main-container__folder-addlist'>
         <div className='app__main-container__folder-nameoflist'>
             <input type="text" 
             value={newListName}
@@ -69,6 +69,12 @@ const AddList = ({lists,setLists, isAddList,setIsAddList,getListVocab}) => {
             </div>
         </form>
     </div>
+      ):(<div style={{textAlign: 'center', color: 'green', lineHeight: '2rem', fontWeight: 700, fontSize: '20px'}}><div>Added new list successful!<br /> please wait a minute !</div>
+      <div class="circle-loader"></div>
+      </div>
+      )}
+    
+    </>
   )
 }
 
