@@ -60,17 +60,22 @@ const Main = () => {
 
 
     function handleAddFolderClick() {
-      if (localStorage.getItem('vocabulary').length > 2) {
-        const willDelete = window.confirm('You have not saved the list are you sure to go back?');
-        if (willDelete) {
-          localStorage.setItem('vocabulary', JSON.stringify(0));
-          setToggled(!isAddList);
+      try {
+        if (localStorage.getItem('vocabulary').length > 2) {
+          const willDelete = window.confirm('You have not saved the list are you sure to go back?');
+          if (willDelete) {
+            localStorage.setItem('vocabulary', JSON.stringify(0));
+            setToggled(!isAddList);
+          } else {
+  
+          }
         } else {
-
+          setToggled(!isAddList);
         }
-      } else {
-        setToggled(!isAddList);
+      } catch (err) {
+        
       }
+      
     }
   return loading ? (<><Layout><h1>Loading...</h1></Layout></>) : (
     <Layout >
