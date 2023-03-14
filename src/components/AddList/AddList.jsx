@@ -22,7 +22,8 @@ const AddList = ({lists,setLists, isAddList,setIsAddList,getListVocab}) => {
         }
         try {
             const dataUser = await fetchUserInfo()
-            const user_id = dataUser.data.user.user_id
+            console.log(dataUser.user)
+            const user_id = dataUser.user.user_id
             const listName = {title: newListName, user_id: user_id}
             const { data } = await addNewListVocab(listName)
     
@@ -39,6 +40,7 @@ const AddList = ({lists,setLists, isAddList,setIsAddList,getListVocab}) => {
                     return addNewVocab(vocab);
                 })
             );
+
             setNewListName('');
             localStorage.setItem('vocabulary', JSON.stringify(0));
             setIsAddList(!isAddList)
